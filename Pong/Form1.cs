@@ -15,22 +15,30 @@ namespace Pong
     {
         Graphics graphics;
         Controller controller;
+        Ball ball;
+        Paddle leftPaddle;
+        Paddle rightPaddle;
 
         private Bitmap offScreenBitmap;
         private Graphics offScreenGraphics;
+
+        private HashSet<Keys> pressedKeys;
 
         public Form1()
         {
             InitializeComponent();
 
-            graphics = CreateGraphics();
             offScreenBitmap = new Bitmap(Width, Height);
             offScreenGraphics = Graphics.FromImage(offScreenBitmap);
+
             graphics = CreateGraphics();
             controller = new Controller(offScreenGraphics, ClientSize);
+            
             timer1.Enabled = true;
+            
+            pressedKeys = new HashSet<Keys>();
 
-            controller.Run();
+            
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
@@ -55,6 +63,34 @@ namespace Pong
             offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
             controller.Run();
             graphics.DrawImage(offScreenBitmap, 0, 0);
+
+            if (pressedKeys.Contains(Keys.W))
+            {
+                controller.LeftPaddle.MoveUp(true);
+            }
+            if (pressedKeys.Contains(Keys.S))
+            {
+                controller.LeftPaddle.MoveDown(true);
+            }
+            if (pressedKeys.Contains(Keys.Up))
+            {
+                controller.RightPaddle.MoveUp(true);
+            }
+            if (pressedKeys.Contains(Keys.Down))
+            {
+                controller.RightPaddle.MoveDown(true);
+            }
+
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            pressedKeys.Remove(e.KeyCode);
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            pressedKeys.Add(e.KeyCode);
         }
     }
 }

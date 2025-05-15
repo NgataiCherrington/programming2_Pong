@@ -10,7 +10,7 @@ namespace task7_graphics
 {
     public class Ball
     {
-        private const int SIZE = 25;
+        private const int SIZE = 20;
         private Point speed;
         private Point position;
         private Color color;
@@ -34,6 +34,11 @@ namespace task7_graphics
             this.Graphics = graphics;
             this.ClientSize = clientSize;
             brush = new SolidBrush(color);
+        }
+
+        public Rectangle GetBounds()
+        {
+            return new Rectangle(position.X, position.Y, SIZE, SIZE);
         }
 
         public void Draw()

@@ -4,12 +4,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Pong
 {
     public class Paddle
     {
         private Point position;
+        private Point speed;
         private Color color;
         private Graphics graphics;
         private Brush brush;
@@ -20,10 +22,12 @@ namespace Pong
         public Graphics Graphics { get => graphics; set => graphics = value; }
         public Brush Brush { get => brush; set => brush = value; }
         public Size ClientSize { get => clientSize; set => clientSize = value; }
+        public Point Speed { get => speed; set => speed = value; }
 
-        public Paddle(Point position, Color color, Graphics graphics, Brush brush, Size clientSize) 
+        public Paddle(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) 
         {
             this.Position = position;
+            this.Speed = speed;
             this.Color = color;
             this.Graphics = graphics;
             this.Brush = brush;
@@ -31,13 +35,31 @@ namespace Pong
             brush = new SolidBrush(color);
         }
 
-        public void Draw()
+        public Rectangle GetBounds()
         {
-            graphics.FillRectangle(brush, new Rectangle(position.X, position.Y, 15, 75));
+            return new Rectangle(position.X, position.Y, (int)(double)16.5, 95);
         }
 
+        public void Draw()
+        {
+            graphics.FillRectangle(brush, new Rectangle(position.X, position.Y, (int)(double)16.5, 95));
+        }
+        
+        public void MoveUp(bool moveUp)
+        {
+            if(moveUp)
+            {
+                position.Y -= speed.Y + 2;
+            }
+        }
+        
+        public void MoveDown(bool moveDown)
+        {
+            if (moveDown)
+            {
+                position.Y += speed.Y + 2;
+            }
+        }
 
     }
-
-
 }
