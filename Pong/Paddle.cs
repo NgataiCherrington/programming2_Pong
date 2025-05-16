@@ -49,7 +49,7 @@ namespace Pong
         {
             if(moveUp)
             {
-                position.Y -= speed.Y + 2;
+                position.Y -= speed.Y + 10;
             }
         }
         
@@ -57,7 +57,7 @@ namespace Pong
         {
             if (moveDown)
             {
-                position.Y += speed.Y + 2;
+                position.Y += speed.Y + 10;
             }
         }
 

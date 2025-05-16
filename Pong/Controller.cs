@@ -36,30 +36,20 @@ namespace task7_graphics
             
             if (ballBounds.IntersectsWith(leftPaddleBounds))
             {
-                ball.Speed = new Point(-ball.Speed.X, ball.Speed.Y + (ball.Position.Y - leftPaddle.Position.Y / 10));
+                int verticalHitDifference = ball.Position.Y - leftPaddle.Position.Y;
+                int verticalSpeedChange = verticalHitDifference / (leftPaddle.GetBounds().Height / 2);
+                ball.Speed = new Point(-ball.Speed.X, ball.Speed.Y + verticalSpeedChange);
             }
 
             if (ballBounds.IntersectsWith(rightPaddleBounds))
             {
-                ball.Speed = new Point(-ball.Speed.X, ball.Speed.Y + (ball.Position.Y - leftPaddle.Position.Y / 10));
+                int verticalHitDifference = ball.Position.Y - rightPaddle.Position.Y;
+                int verticalSpeedChange = verticalHitDifference / (rightPaddle.GetBounds().Height / 2);
+                ball.Speed = new Point(-ball.Speed.X, ball.Speed.Y + verticalSpeedChange);
             }
         }
 
-        public void ResetBall()
-        {
-            ball.Position = new Point(ball.ClientSize.Width / 2, ball.ClientSize.Height / 2);
-            
-            Random random = new Random();
-            int speedX = random.Next(5, 10) == 0 ? 5 : -5;
-            int speedY = random.Next(-3, 4);
-
-            if (speedY == 0)
-            {
-                speedY = 1;
-            }
-
-            ball.Speed = new Point(speedX, speedY);
-        }
+        
 
         public void Run()
         {

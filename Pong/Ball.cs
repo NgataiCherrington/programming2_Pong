@@ -48,15 +48,30 @@ namespace task7_graphics
 
         public void Move()
         {
-            position.X = position.X + speed.X;
-            position.Y = position.Y + speed.Y;
+            position.X += speed.X;
+            position.Y += speed.Y;
+        }
+
+        public void ResetBall()
+        {
+            Position = new Point(ClientSize.Width / 2, ClientSize.Height / 2);
+
+            Random random = new Random();
+
+            int directionX = random.Next(0, 2) == 0 ? 5 : -5;
+            int directionY = random.Next(0, 2) == 0 ? 5 : -5;
+
+            int speedX = random.Next(4, 7) * directionX;
+            int speedY = random.Next(2, 5) * directionY;
+
+            Speed = new Point(speedX, speedY);
         }
 
         public void BounceSide()
         {
             if (position.X < 0 || position.X > clientSize.Width)
             {
-                speed.X = -speed.X;
+                ResetBall();
             }
 
             if (position.Y < 0 || position.Y > clientSize.Height)
@@ -64,5 +79,7 @@ namespace task7_graphics
                 speed.Y = -speed.Y;
             }
         }
+
+       
     }
 }
