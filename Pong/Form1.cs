@@ -18,6 +18,7 @@ namespace Pong
         Ball ball;
         Paddle leftPaddle;
         Paddle rightPaddle;
+        
 
         private Bitmap offScreenBitmap;
         private Graphics offScreenGraphics;

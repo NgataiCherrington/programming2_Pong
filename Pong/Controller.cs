@@ -15,16 +15,19 @@ namespace task7_graphics
         private Ball ball;
         private Paddle leftPaddle;
         private Paddle rightPaddle;
+        private Color color;
         
         public Ball Ball { get => ball; set => ball = value; }
         public Paddle LeftPaddle { get => leftPaddle; set => leftPaddle = value; }
         public Paddle RightPaddle { get => rightPaddle; set => rightPaddle = value; }
+        public Color Color { get => color; set => color = value; }
 
         public Controller(Graphics graphics, Size clientSize) 
         {
-            ball = new Ball(new Point(15, 15), new Point(clientSize.Width / 2, clientSize.Height / 2), Color.White, graphics, clientSize);
-            leftPaddle = new Paddle(new Point(20, clientSize.Height / 2), new Point((int)(double) 8.5, (int)(double)8.5), Color.White, graphics, Brushes.White, clientSize);
-            rightPaddle = new Paddle(new Point(clientSize.Width - 40, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.White, graphics, Brushes.White, clientSize);
+            Random random = new Random();
+            ball = new Ball(new Point(30, 10), new Point(clientSize.Width / 2, clientSize.Height / 2), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
+            leftPaddle = new Paddle(new Point(20, clientSize.Height / 2), new Point((int)(double) 8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
+            rightPaddle = new Paddle(new Point(clientSize.Width - 40, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
         }
 
    
@@ -49,7 +52,7 @@ namespace task7_graphics
             }
         }
 
-        
+
 
         public void Run()
         {

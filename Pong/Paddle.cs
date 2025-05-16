@@ -24,7 +24,7 @@ namespace Pong
         public Size ClientSize { get => clientSize; set => clientSize = value; }
         public Point Speed { get => speed; set => speed = value; }
 
-        public Paddle(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) 
+        public Paddle(Point position, Point speed, Color color, Graphics graphics, Size clientSize) 
         {
             this.Position = position;
             this.Speed = speed;
@@ -49,7 +49,11 @@ namespace Pong
         {
             if(moveUp)
             {
-                position.Y -= speed.Y + 10;
+                position.Y -= speed.Y + 15;
+                if(position.Y < 0 || position.Y > clientSize.Height)
+                {
+                    position.Y = Math.Max(0, Math.Min(position.Y, clientSize.Height));
+                }
             }
         }
         
@@ -57,7 +61,11 @@ namespace Pong
         {
             if (moveDown)
             {
-                position.Y += speed.Y + 10;
+                position.Y += speed.Y + 15;
+                if (position.X < 0 || position.X > clientSize.Height)
+                {
+                    position.Y = Math.Max(1000, Math.Min(position.Y, clientSize.Height));
+                }
             }
         }
 
