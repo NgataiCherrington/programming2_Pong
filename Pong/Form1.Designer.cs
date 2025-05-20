@@ -76,19 +76,20 @@
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(346, 307);
+            this.button2.Location = new System.Drawing.Point(338, 307);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(201, 53);
             this.button2.TabIndex = 2;
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Black;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(325, 119);
+            this.pictureBox2.Location = new System.Drawing.Point(218, 118);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(222, 29);
+            this.pictureBox2.Size = new System.Drawing.Size(435, 29);
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
             // 

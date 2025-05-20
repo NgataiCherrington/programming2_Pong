@@ -18,41 +18,41 @@ namespace Pong
         Ball ball;
         Paddle leftPaddle;
         Paddle rightPaddle;
-        
+
 
         private Bitmap offScreenBitmap;
         private Graphics offScreenGraphics;
+        private bool isRunning;
 
         private HashSet<Keys> pressedKeys;
 
         public Form1()
         {
             InitializeComponent();
-            KeyPreview = true;
+            KeyPreview = true;  // Enable key events for the form
 
-            offScreenBitmap = new Bitmap(Width, Height);
-            offScreenGraphics = Graphics.FromImage(offScreenBitmap);
+            offScreenBitmap = new Bitmap(Width, Height); // Create a bitmap for off-screen drawing
+            offScreenGraphics = Graphics.FromImage(offScreenBitmap); // Create graphics from the bitmap
 
-            graphics = CreateGraphics();
-            controller = new Controller(offScreenGraphics, ClientSize);
-            
-            timer1.Enabled = false;
-            timer1.Interval = 16;
-            
-            pressedKeys = new HashSet<Keys>();
+            graphics = CreateGraphics(); // Create graphics for the form
+            controller = new Controller(offScreenGraphics, ClientSize); // Initialize the controller with the off-screen graphics
 
-            pictureBox1.Visible = true;
-            pictureBox2.Visible = true;
-            button1.Visible = true;
-            button2.Visible = true;
+            timer1.Enabled = false; // Disable the timer initially
+            timer1.Interval = 16; // Set the timer interval to approximately 60 FPS
 
+            pressedKeys = new HashSet<Keys>(); // Initialize the set of pressed keys
 
+            pictureBox1.Visible = true; // Logo image
+            pictureBox2.Visible = true; // Made by image
+            button1.Visible = true; // Play button
+            button2.Visible = true; // Controls button
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
             Font font = new Font("Tahoma", 6, FontStyle.Regular);
 
+            // Draw the grid
             for (int x = 0; x < Width; x += 20)
             {
                 graphics.DrawLine(Pens.Black, new Point(x, 0), new Point(x, Height));
@@ -68,27 +68,30 @@ namespace Pong
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
-            controller.Run();
-            graphics.DrawImage(offScreenBitmap, 0, 0);
+            if (isRunning)
+            { 
+                offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
+                controller.Run();
+                graphics.DrawImage(offScreenBitmap, 0, 0);
 
-            if (pressedKeys.Contains(Keys.W))
-            {
-                controller.LeftPaddle.MoveUp(true);
-            }
-            if (pressedKeys.Contains(Keys.S))
-            {
-                controller.LeftPaddle.MoveDown(true);
-            }
-            if (pressedKeys.Contains(Keys.Up))
-            {
-                controller.RightPaddle.MoveUp(true);
-            }
-            if (pressedKeys.Contains(Keys.Down))
-            {
-                controller.RightPaddle.MoveDown(true);
-            }
+                if (pressedKeys.Contains(Keys.W))
+                {
+                    controller.LeftPaddle.MoveUp(true);
+                }
+                if (pressedKeys.Contains(Keys.S))
+                {
+                    controller.LeftPaddle.MoveDown(true);
+                }
+                if (pressedKeys.Contains(Keys.Up))
+                {
+                    controller.RightPaddle.MoveUp(true);
+                }
+                if (pressedKeys.Contains(Keys.Down))
+                {
+                    controller.RightPaddle.MoveDown(true);
+                }
 
+            }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -99,6 +102,11 @@ namespace Pong
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             pressedKeys.Add(e.KeyCode);
+
+            if (e.KeyCode == Keys.Space)
+            {
+                isRunning = true;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -112,6 +120,11 @@ namespace Pong
             // Start the game
             timer1.Enabled = true;
             controller.Ball.ResetBall();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
