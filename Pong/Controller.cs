@@ -56,12 +56,12 @@ namespace task7_graphics
 
         public void Run()
         {
-            ball.Move();
-            CheckCollison();
             ball.Draw();
-            ball.BounceSide();
             leftPaddle.Draw();
             rightPaddle.Draw();
+            ball.BounceSide();
+            ball.Move();
+            CheckCollison();
         }
     }
 }

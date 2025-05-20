@@ -61,8 +61,8 @@ namespace task7_graphics
             int directionX = random.Next(0, 2) == 0 ? 5 : -5;
             int directionY = random.Next(0, 2) == 0 ? 5 : -5;
 
-            int speedX = random.Next(4, 7) * directionX;
-            int speedY = random.Next(2, 5) * directionY;
+            int speedX = random.Next(2, 3) * directionX;
+            int speedY = random.Next(1, 2) * directionY;
 
             Speed = new Point(speedX, speedY);
         }

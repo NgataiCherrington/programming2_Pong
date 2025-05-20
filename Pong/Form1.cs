@@ -28,6 +28,7 @@ namespace Pong
         public Form1()
         {
             InitializeComponent();
+            KeyPreview = true;
 
             offScreenBitmap = new Bitmap(Width, Height);
             offScreenGraphics = Graphics.FromImage(offScreenBitmap);
@@ -35,11 +36,17 @@ namespace Pong
             graphics = CreateGraphics();
             controller = new Controller(offScreenGraphics, ClientSize);
             
-            timer1.Enabled = true;
+            timer1.Enabled = false;
+            timer1.Interval = 16;
             
             pressedKeys = new HashSet<Keys>();
 
-            
+            pictureBox1.Visible = true;
+            pictureBox2.Visible = true;
+            button1.Visible = true;
+            button2.Visible = true;
+
+
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
@@ -92,6 +99,19 @@ namespace Pong
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             pressedKeys.Add(e.KeyCode);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Hide the menu
+            pictureBox1.Visible = false;
+            pictureBox2.Visible = false;
+            button1.Visible = false;
+            button2.Visible = false;
+
+            // Start the game
+            timer1.Enabled = true;
+            controller.Ball.ResetBall();
         }
     }
 }
