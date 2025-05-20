@@ -47,25 +47,17 @@ namespace Pong
         
         public void MoveUp(bool moveUp)
         {
-            if(moveUp)
+            if(moveUp && position.Y > 0)
             {
                 position.Y -= speed.Y + 5;
-                if(position.Y < 0 || position.Y > clientSize.Height)
-                {
-                    position.Y = Math.Max(0, Math.Min(position.Y, clientSize.Height));
-                }
             }
         }
         
         public void MoveDown(bool moveDown)
         {
-            if (moveDown)
+            if (moveDown && position.Y + GetBounds().Height < clientSize.Height)
             {
                 position.Y += speed.Y + 5;
-                if (position.Y < 0 || position.Y > clientSize.Height)
-                {
-                    position.Y = Math.Max(0, Math.Min(position.Y, clientSize.Height));
-                }
             }
         }
 

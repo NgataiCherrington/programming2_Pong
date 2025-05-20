@@ -17,6 +17,7 @@ namespace task7_graphics
         private Graphics graphics;
         private Brush brush;
         private Size clientSize;
+       
 
         public static int SIZE1 => SIZE;
         public Point Speed { get => speed; set => speed = value; }
@@ -46,10 +47,18 @@ namespace task7_graphics
             graphics.FillEllipse(brush, new Rectangle(position.X, position.Y, SIZE, SIZE));
         }
 
-        public void Move()
+        public void Move(bool move)
         {
-            position.X += speed.X;
-            position.Y += speed.Y;
+            if (move)
+            {
+                position.X += speed.X;
+                position.Y += speed.Y;
+            }
+            else
+            {
+                position.X = position.X;
+                position.Y = position.Y;
+            }
         }
 
         public void ResetBall()
