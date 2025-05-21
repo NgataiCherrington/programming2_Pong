@@ -48,6 +48,42 @@ namespace Pong
             button2.Visible = true; // Controls button
         }
 
+        private void ToggleMenu(bool isShowing)
+        {
+            if (!isShowing)
+            {
+                // Hide the menu
+                pictureBox1.Visible = false;
+                pictureBox2.Visible = false;
+                button1.Visible = false;
+                button2.Visible = false;
+
+                // Show the controls menu
+                pictureBox3.Visible = false;
+                pictureBox4.Visible = false;
+                pictureBox5.Visible = false;
+                pictureBox6.Visible = false;
+                pictureBox7.Visible = false;
+                pictureBox8.Visible = false;
+                button3.Visible = false;
+            }
+        }
+
+        private void TogglePauseMenu(bool isShowing)
+        {
+           if (isShowing)
+            {
+                pictureBox9.Visible = true;
+                pictureBox10.Visible = false;
+            }
+
+           if (!isShowing)
+            {
+                pictureBox9.Visible = false;
+                pictureBox10.Visible = true;
+            }
+        }
+
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
             Font font = new Font("Tahoma", 6, FontStyle.Regular);
@@ -69,7 +105,8 @@ namespace Pong
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (isRunning)
-            { 
+            {
+                ToggleMenu(false);
                 offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
                 controller.Run();
                 graphics.DrawImage(offScreenBitmap, 0, 0);
@@ -106,6 +143,14 @@ namespace Pong
             if (e.KeyCode == Keys.Space)
             {
                 isRunning = true;
+                TogglePauseMenu(true);
+            }
+
+            
+            if (e.KeyCode == Keys.P)
+            {
+                isRunning = false;
+                TogglePauseMenu(false);
             }
         }
 
@@ -117,6 +162,9 @@ namespace Pong
             button1.Visible = false;
             button2.Visible = false;
 
+            // Show pause controls
+            TogglePauseMenu(true);
+
             // Start the game
             timer1.Enabled = true;
             controller.Ball.ResetBall();
@@ -124,7 +172,39 @@ namespace Pong
 
         private void button2_Click(object sender, EventArgs e)
         {
+            // Hide the menu
+            pictureBox1.Visible = false;
+            pictureBox2.Visible = false;
+            button1.Visible = false;
+            button2.Visible = false;
 
+            // Show the controls menu
+            pictureBox3.Visible = true;
+            pictureBox4.Visible = true;
+            pictureBox5.Visible = true;
+            pictureBox6.Visible = true;
+            pictureBox7.Visible = true;
+            pictureBox8.Visible = true;
+            button3.Visible = true;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Hide the menu
+            pictureBox1.Visible = true;
+            pictureBox2.Visible = true;
+            button1.Visible = true;
+            button2.Visible = true;
+
+            // Show the controls menu
+            pictureBox3.Visible = false;
+            pictureBox4.Visible = false;
+            pictureBox5.Visible = false;
+            pictureBox6.Visible = false ;
+            pictureBox7.Visible = false;
+            pictureBox8.Visible = false;
+            button3.Visible = false;
+        }
+
     }
 }

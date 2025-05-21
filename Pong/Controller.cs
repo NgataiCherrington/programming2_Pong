@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.PropertyGridInternal;
 using Pong;
 
 namespace task7_graphics
@@ -17,6 +20,7 @@ namespace task7_graphics
         private Paddle rightPaddle;
         private Color color;
         private Graphics graphics;
+        private SoundPlayer soundPlayer;
         private int scoreLeft = 0;
         private int scoreRight = 0;
 
@@ -43,19 +47,25 @@ namespace task7_graphics
             Rectangle ballBounds = ball.GetBounds();
             Rectangle leftPaddleBounds = leftPaddle.GetBounds();
             Rectangle rightPaddleBounds = rightPaddle.GetBounds();
+
+            soundPlayer = new SoundPlayer();
             
             if (ballBounds.IntersectsWith(leftPaddleBounds))
             {
                 int verticalHitDifference = ball.Position.Y - leftPaddle.Position.Y;
                 int verticalSpeedChange = verticalHitDifference / (leftPaddle.GetBounds().Height / 2);
-                ball.Speed = new Point(-ball.Speed.X, ball.Speed.Y + verticalSpeedChange);
+                ball.Speed = new Point(-ball.Speed.X + (int)(double) 0.5, ball.Speed.Y + verticalSpeedChange );
+               
+                soundPlayer.Play();
             }
 
             if (ballBounds.IntersectsWith(rightPaddleBounds))
             {
                 int verticalHitDifference = ball.Position.Y - rightPaddle.Position.Y;
                 int verticalSpeedChange = verticalHitDifference / (rightPaddle.GetBounds().Height / 2);
-                ball.Speed = new Point(-ball.Speed.X, ball.Speed.Y + verticalSpeedChange);
+                ball.Speed = new Point(-ball.Speed.X + (int)(double) 0.5, ball.Speed.Y + verticalSpeedChange);
+
+                soundPlayer.Play();
             }
         }
 
