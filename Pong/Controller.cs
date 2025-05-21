@@ -52,18 +52,34 @@ namespace task7_graphics
             
             if (ballBounds.IntersectsWith(leftPaddleBounds))
             {
-                int verticalHitDifference = ball.Position.Y - leftPaddle.Position.Y;
-                int verticalSpeedChange = verticalHitDifference / (leftPaddle.GetBounds().Height / 2);
-                ball.Speed = new Point(-ball.Speed.X + (int)(double) 0.5, ball.Speed.Y + verticalSpeedChange );
-               
+                //int verticalHitDifference = ball.Position.Y - leftPaddle.Position.Y;
+                //int verticalSpeedChange = verticalHitDifference / (leftPaddle.GetBounds().Height * 2);
+
+                int paddleMiddle = leftPaddle.Position.Y + leftPaddle.GetBounds().Height / 2;
+                if (ball.Position.Y < paddleMiddle)
+                {
+                    ball.Speed = new Point(-ball.Speed.X * (int)(double)1.05, -Math.Abs(ball.Speed.Y));
+                }
+                else
+                {
+                    ball.Speed = new Point(-ball.Speed.X * (int)(double)1.05, Math.Abs(ball.Speed.Y));
+                }
+                //ball.Speed = new Point(-ball.Speed.X * (int)(double) 1.05, ball.Speed.Y + verticalSpeedChange);
+                 
                 soundPlayer.Play();
             }
 
             if (ballBounds.IntersectsWith(rightPaddleBounds))
             {
-                int verticalHitDifference = ball.Position.Y - rightPaddle.Position.Y;
-                int verticalSpeedChange = verticalHitDifference / (rightPaddle.GetBounds().Height / 2);
-                ball.Speed = new Point(-ball.Speed.X + (int)(double) 0.5, ball.Speed.Y + verticalSpeedChange);
+                int paddleMiddle = rightPaddle.Position.Y + rightPaddle.GetBounds().Height / 2;
+                if (ball.Position.Y < paddleMiddle)
+                {
+                    ball.Speed = new Point(-ball.Speed.X * (int)(double)1.05, -Math.Abs(ball.Speed.Y));
+                }
+                else
+                {
+                    ball.Speed = new Point(-ball.Speed.X * (int)(double)1.05, Math.Abs(ball.Speed.Y));
+                }
 
                 soundPlayer.Play();
             }
