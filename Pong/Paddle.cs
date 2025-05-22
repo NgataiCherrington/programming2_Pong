@@ -61,6 +61,5 @@ namespace Pong
                 position.Y += speed.Y + (int)(double) 3.5;
             }
         }
-
     }
 }

@@ -27,7 +27,6 @@ namespace task7_graphics
         public Paddle LeftPaddle { get => leftPaddle; set => leftPaddle = value; }
         public Paddle RightPaddle { get => rightPaddle; set => rightPaddle = value; }
         
-
         public Controller(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) : base(position, speed, color, graphics, brush, clientSize)
         {
             this.Graphics = graphics;
@@ -36,13 +35,11 @@ namespace task7_graphics
             rightPaddle = new Paddle(new Point(clientSize.Width - 30, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
         }
 
-
         public void CheckCollison()
         {
             Rectangle ballBounds = ball.GetBounds();  // Get the bounds of the ball
             Rectangle leftPaddleBounds = leftPaddle.GetBounds(); // Get the bounds of the left paddle
             Rectangle rightPaddleBounds = rightPaddle.GetBounds(); // Get the bounds of the right paddle
-
 
             soundPlayer = new SoundPlayer(Pong.Properties.Resources.paddle1); // Initialize the sound player
 
@@ -109,13 +106,14 @@ namespace task7_graphics
             if (ball.Position.X < 0) // Ball went out on the left side
             {
                 scoreRight++; // Right player scores
-                ball.ResetBall();   // Reset the ball
+                ball.ResetBall();  // Reset the ball
                 
                 if (scoreRight == 10)
                 {
                     ResetGamePosition();
                 }
             }
+
             else if (ball.Position.X > ball.ClientSize.Width) // Ball went out on the right side
             {
                 scoreLeft++;  // Left player scores
@@ -123,13 +121,10 @@ namespace task7_graphics
                 
                 if (scoreLeft == 10)
                 {
-
                     ResetGamePosition();
                 }
             }
         }
-
-
 
         public void Run()
         {

@@ -210,6 +210,5 @@ namespace Pong
             pictureBox8.Visible = false;
             button3.Visible = false;
         }
-
     }
 }
