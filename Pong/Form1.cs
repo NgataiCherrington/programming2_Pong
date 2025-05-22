@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 using task7_graphics;
 
 namespace Pong
@@ -71,16 +72,16 @@ namespace Pong
 
         private void TogglePauseMenu(bool isShowing)
         {
-           if (isShowing)
-            {
-                pictureBox9.Visible = true;
-                pictureBox10.Visible = false;
-            }
-
            if (!isShowing)
             {
                 pictureBox9.Visible = false;
                 pictureBox10.Visible = true;
+            }
+
+           if (isShowing)
+            {
+                pictureBox9.Visible = true;
+                pictureBox10.Visible = false;
             }
         }
 
@@ -140,17 +141,21 @@ namespace Pong
         {
             pressedKeys.Add(e.KeyCode);
 
-            if (e.KeyCode == Keys.Space)
+            switch (e.KeyCode)
             {
-                isRunning = true;
-                TogglePauseMenu(true);
-            }
-
-            
-            if (e.KeyCode == Keys.P)
-            {
-                isRunning = false;
-                TogglePauseMenu(false);
+                case Keys.Space:
+                    isRunning = true;
+                    TogglePauseMenu(true);
+                    pictureBox11.Visible = false; // Hide play image
+                    break;
+                case Keys.P:
+                    isRunning = false;
+                    TogglePauseMenu(false);
+                    break;
+                case Keys.R:
+                    isRunning = false;
+                    controller.ResetGamePosition();
+                    break;     
             }
         }
 
@@ -161,9 +166,7 @@ namespace Pong
             pictureBox2.Visible = false;
             button1.Visible = false;
             button2.Visible = false;
-
-            // Show pause controls
-            TogglePauseMenu(true);
+            pictureBox11.Visible = true; // Show play image
 
             // Start the game
             timer1.Enabled = true;
