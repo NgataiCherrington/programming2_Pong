@@ -36,7 +36,9 @@ namespace Pong
             offScreenGraphics = Graphics.FromImage(offScreenBitmap); // Create graphics from the bitmap
 
             graphics = CreateGraphics(); // Create graphics for the form
-            controller = new Controller(offScreenGraphics, ClientSize); // Initialize the controller with the off-screen graphics
+            
+            controller = new Controller(new Point(0, 0), new Point(0, 0), Color.Black, offScreenGraphics, Brushes.White, ClientSize); // Initialize the offScreen graphics
+
 
             timer1.Enabled = false; // Disable the timer initially
             timer1.Interval = 16; // Set the timer interval to approximately 60 FPS

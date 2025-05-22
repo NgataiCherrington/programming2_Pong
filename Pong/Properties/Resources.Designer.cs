@@ -61,12 +61,11 @@ namespace Pong.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static byte[] ping_pong {
+        internal static System.IO.UnmanagedMemoryStream paddle1 {
             get {
-                object obj = ResourceManager.GetObject("ping_pong", resourceCulture);
-                return ((byte[])(obj));
+                return ResourceManager.GetStream("paddle1", resourceCulture);
             }
         }
     }

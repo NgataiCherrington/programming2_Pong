@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using task7_graphics;
 
 namespace Pong
 {
@@ -49,7 +50,7 @@ namespace Pong
         {
             if(moveUp && position.Y > 0)
             {
-                position.Y -= speed.Y + (int)(double) 2.5;
+                position.Y -= speed.Y + (int)(double) 3.5;
             }
         }
         
@@ -57,7 +58,7 @@ namespace Pong
         {
             if (moveDown && position.Y + GetBounds().Height < clientSize.Height)
             {
-                position.Y += speed.Y + (int)(double) 2.5;
+                position.Y += speed.Y + (int)(double) 3.5;
             }
         }
 

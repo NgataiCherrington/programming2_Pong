@@ -13,32 +13,27 @@ using Pong;
 
 namespace task7_graphics
 {
-    public class Controller
+    public class Controller : GameObject
     {
         private Ball ball;
         private Paddle leftPaddle;
         private Paddle rightPaddle;
-        private Color color;
-        private Graphics graphics;
         private SoundPlayer soundPlayer;
         private int scoreLeft = 0;
         private int scoreRight = 0;
+        Random random = new Random();
 
         public Ball Ball { get => ball; set => ball = value; }
         public Paddle LeftPaddle { get => leftPaddle; set => leftPaddle = value; }
         public Paddle RightPaddle { get => rightPaddle; set => rightPaddle = value; }
-        public Color Color { get => color; set => color = value; }
-        public int ScoreLeft { get => scoreLeft; set => scoreLeft = value; }
-        public int ScoreRight { get => scoreRight; set => scoreRight = value; }
-        public Graphics Graphics { get => graphics; set => graphics = value; }
+        
 
-        public Controller(Graphics graphics, Size clientSize)
+        public Controller(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) : base(position, speed, color, graphics, brush, clientSize)
         {
             this.Graphics = graphics;
-            Random random = new Random();
-            ball = new Ball(new Point(30, 10), new Point(clientSize.Width / 2, clientSize.Height / 2), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
-            leftPaddle = new Paddle(new Point(20, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
-            rightPaddle = new Paddle(new Point(clientSize.Width - 40, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
+            ball = new Ball(new Point(30, 10), new Point(clientSize.Width / 2, clientSize.Height / 2), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, brush, clientSize);
+            leftPaddle = new Paddle(new Point(10, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
+            rightPaddle = new Paddle(new Point(clientSize.Width - 30, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
         }
 
 
@@ -48,32 +43,39 @@ namespace task7_graphics
             Rectangle leftPaddleBounds = leftPaddle.GetBounds(); // Get the bounds of the left paddle
             Rectangle rightPaddleBounds = rightPaddle.GetBounds(); // Get the bounds of the right paddle
 
-            soundPlayer = new SoundPlayer(); // Initialize the sound player
+
+            soundPlayer = new SoundPlayer(Pong.Properties.Resources.paddle1); // Initialize the sound player
 
             if (ballBounds.IntersectsWith(leftPaddleBounds)) // Check if the ball intersects with the left paddle
             {
                 int paddleMiddle = leftPaddle.Position.Y + leftPaddle.GetBounds().Height / 2; // Calculate the middle of the paddle
                 if (ball.Position.Y < paddleMiddle) 
                 {
-                    ball.Speed = new Point(-ball.Speed.X * (int)(double)1.05, -Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
+                    //ball.Speed = new Point(-ball.Speed.X + 1, -Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
+                    ball.Speed = new Point(-ball.Speed.X + 5, ball.Speed.Y + random.Next(-2, 7));
                 }
                 else
                 {
-                    ball.Speed = new Point(-ball.Speed.X * (int)(double)1.05, Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
+                    //ball.Speed = new Point(-ball.Speed.X + 1, Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
+                    ball.Speed = new Point(-ball.Speed.X + 5, ball.Speed.Y + random.Next(-2, 7));
                 }
+
                 soundPlayer.Play();
             }
 
             if (ballBounds.IntersectsWith(rightPaddleBounds))
             {
-                int paddleMiddle = rightPaddle.Position.Y + rightPaddle.GetBounds().Height / 2;
+                int paddleMiddle = rightPaddle.Position.Y + rightPaddle.GetBounds().Height / 2; // Calculate the middle of the paddle
+
                 if (ball.Position.Y < paddleMiddle)
                 {
-                    ball.Speed = new Point(-ball.Speed.X * (int)(double)1.05, -Math.Abs(ball.Speed.Y));
+                    //ball.Speed = new Point(-ball.Speed.X + 1, -Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
+                    ball.Speed = new Point(-ball.Speed.X + 1, ball.Speed.Y + random.Next(-2, 7));
                 }
                 else
                 {
-                    ball.Speed = new Point(-ball.Speed.X * (int)(double)1.05, Math.Abs(ball.Speed.Y));
+                    //ball.Speed = new Point(-ball.Speed.X + 1, Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
+                    ball.Speed = new Point(-ball.Speed.X + 1, ball.Speed.Y + random.Next(-2, 7));
                 }
 
                 soundPlayer.Play();
@@ -121,7 +123,7 @@ namespace task7_graphics
                 
                 if (scoreLeft == 10)
                 {
-                    
+
                     ResetGamePosition();
                 }
             }
