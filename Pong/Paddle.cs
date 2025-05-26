@@ -9,31 +9,28 @@ using task7_graphics;
 
 namespace Pong
 {
-    public class Paddle
-    {
-        private Point position;
-        private Point speed;
-        private Color color;
-        private Graphics graphics;
-        private Brush brush;
-        private Size clientSize;
+    public class Paddle : GameObject
+    { 
+        //private Point position;
+        //private Point speed;
+        //private Color color;
+        //private Graphics graphics;
+        //private Brush brush;
+        //private Size clientSize;
 
-        public Point Position { get => position; set => position = value; }
-        public Color Color { get => color; set => color = value; }
-        public Graphics Graphics { get => graphics; set => graphics = value; }
-        public Brush Brush { get => brush; set => brush = value; }
-        public Size ClientSize { get => clientSize; set => clientSize = value; }
-        public Point Speed { get => speed; set => speed = value; }
+        //public Point Position { get => position; set => position = value; }
+        //public Color Color { get => color; set => color = value; }
+        //public Graphics Graphics { get => graphics; set => graphics = value; }
+        //public Brush Brush { get => brush; set => brush = value; }
+        //public Size ClientSize { get => clientSize; set => clientSize = value; }
+        //public Point Speed { get => speed; set => speed = value; }
 
-        public Paddle(Point position, Point speed, Color color, Graphics graphics, Size clientSize) 
+        public Paddle(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) : base(position, speed, color, graphics, brush, clientSize)
         {
-            this.Position = position;
-            this.Speed = speed;
-            this.Color = color;
-            this.Graphics = graphics;
-            this.Brush = brush;
-            this.ClientSize = clientSize;
-            brush = new SolidBrush(color);
+            this.color = color;
+            this.graphics = graphics;
+            this.clientSize = clientSize;
+            this.brush = new SolidBrush(color);
         }
 
         public Rectangle GetBounds()
@@ -50,7 +47,7 @@ namespace Pong
         {
             if(moveUp && position.Y > 0)
             {
-                position.Y -= speed.Y + (int)(double) 3.5;
+                position.Y -= speed.Y + (int)(double) 5;
             }
         }
         
@@ -58,7 +55,7 @@ namespace Pong
         {
             if (moveDown && position.Y + GetBounds().Height < clientSize.Height)
             {
-                position.Y += speed.Y + (int)(double) 3.5;
+                position.Y += speed.Y + (int)(double) 5;
             }
         }
     }

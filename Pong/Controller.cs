@@ -30,9 +30,33 @@ namespace task7_graphics
         public Controller(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) : base(position, speed, color, graphics, brush, clientSize)
         {
             this.Graphics = graphics;
-            ball = new Ball(new Point(30, 10), new Point(clientSize.Width / 2, clientSize.Height / 2), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, brush, clientSize);
-            leftPaddle = new Paddle(new Point(10, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
-            rightPaddle = new Paddle(new Point(clientSize.Width - 30, clientSize.Height / 2), new Point((int)(double)8.5, (int)(double)8.5), Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)), graphics, clientSize);
+
+            ball = new Ball(
+                new Point(30, 10), 
+                new Point(clientSize.Width / 2, clientSize.Height / 2),
+                Color.FromArgb(random.Next(256),
+                random.Next(256), random.Next(256)),
+                graphics, 
+                brush, 
+                clientSize);
+
+            leftPaddle = new Paddle(
+                new Point(10, clientSize.Height / 2),
+                new Point((int)(double)8.5, (int)(double)8.5),
+                Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)),
+                graphics,
+                brush, 
+                clientSize 
+            );
+
+            rightPaddle = new Paddle(
+                new Point(clientSize.Width - 30, clientSize.Height / 2),
+                new Point((int)(double)8.5, (int)(double)8.5),
+                Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)),
+                graphics,
+                brush, 
+                clientSize 
+            );
         }
 
         public void CheckCollison()
