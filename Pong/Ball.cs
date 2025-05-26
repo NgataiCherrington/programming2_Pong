@@ -39,11 +39,6 @@ namespace task7_graphics
                 position.X += speed.X;
                 position.Y += speed.Y;
             }
-            else
-            {
-                position.X = position.X;
-                position.Y = position.Y;
-            }
         }
 
         public void ResetBall()

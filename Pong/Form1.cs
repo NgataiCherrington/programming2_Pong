@@ -25,6 +25,7 @@ namespace Pong
         private Graphics offScreenGraphics;
         private bool isRunning;
 
+
         private HashSet<Keys> pressedKeys;
 
         public Form1()
@@ -112,8 +113,8 @@ namespace Pong
                 {
                     controller.RightPaddle.MoveDown(true);
                 }
-
             }
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -143,7 +144,7 @@ namespace Pong
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // Play button
         {
             // Hide the menu
             pictureBox1.Visible = false;
@@ -157,7 +158,7 @@ namespace Pong
             controller.Ball.ResetBall();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // Controls button
         {
             // Hide the menu
             pictureBox1.Visible = false;
@@ -175,7 +176,7 @@ namespace Pong
             button3.Visible = true;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // Back to menu button
         {
             // Hide the menu
             pictureBox1.Visible = true;

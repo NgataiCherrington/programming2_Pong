@@ -131,8 +131,8 @@ namespace task7_graphics
             {
                 scoreRight++; // Right player scores
                 ball.ResetBall();  // Reset the ball
-                
-                if (scoreRight == 10)
+
+                if (scoreRight == 1)
                 {
                     ResetGamePosition();
                 }
@@ -142,8 +142,8 @@ namespace task7_graphics
             {
                 scoreLeft++;  // Left player scores
                 ball.ResetBall();   // Reset the ball
-                
-                if (scoreLeft == 10)
+
+                if (scoreLeft == 1)
                 {
                     ResetGamePosition();
                 }
