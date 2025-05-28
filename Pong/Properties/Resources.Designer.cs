@@ -63,6 +63,15 @@ namespace Pong.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream gameMusic {
+            get {
+                return ResourceManager.GetStream("gameMusic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream paddle1 {
             get {
                 return ResourceManager.GetStream("paddle1", resourceCulture);

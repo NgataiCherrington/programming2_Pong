@@ -20,11 +20,10 @@ namespace Pong
         Paddle leftPaddle;
         Paddle rightPaddle;
 
-
         private Bitmap offScreenBitmap;
         private Graphics offScreenGraphics;
         private bool isRunning;
-
+        private SoundPlayer soundPlayer;
 
         private HashSet<Keys> pressedKeys;
 
@@ -50,9 +49,12 @@ namespace Pong
             pictureBox2.Visible = true; // Made by image
             button1.Visible = true; // Play button
             button2.Visible = true; // Controls button
+
+            soundPlayer = new SoundPlayer(Properties.Resources.gameMusic); // Load the sound file
+            soundPlayer.PlayLooping(); // Play the sound in a loop
         }
 
-        private void ToggleMenu(bool isShowing)
+        private void ToggleMenu(bool isShowing)     // This method toggles the visibility of the main menu and controls menu
         {
             if (!isShowing)
             {
@@ -73,7 +75,7 @@ namespace Pong
             }
         }
 
-        private void TogglePauseMenu(bool isShowing)
+        private void TogglePauseMenu(bool isShowing)    //  This method toggles the visibility of the pause menu
         {
            if (!isShowing)
             {
@@ -88,13 +90,14 @@ namespace Pong
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)    // This method is called on each timer tick to update the game state
         {
-            if (isRunning)
+
+            if (isRunning)  // If the game is running, we will update the game state
             {
                 ToggleMenu(false);
-                offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
-                controller.Run();
+                offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);    // Clear the off-screen graphics with a black rectangle
+                controller.Run();   //  Run the game logic
                 graphics.DrawImage(offScreenBitmap, 0, 0);
 
                 if (pressedKeys.Contains(Keys.W))
@@ -117,16 +120,16 @@ namespace Pong
 
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        private void Form1_KeyUp(object sender, KeyEventArgs e)     // This method is called when a key is released
         {
-            pressedKeys.Remove(e.KeyCode);
+            pressedKeys.Remove(e.KeyCode);  //  Remove the key from the set of pressed keys
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)   //  This method is called when a key is pressed
         {
-            pressedKeys.Add(e.KeyCode);
+            pressedKeys.Add(e.KeyCode);     //  Add the key to the set of pressed keys
 
-            switch (e.KeyCode)
+            switch (e.KeyCode)  //  Switch statement to handle key presses
             {
                 case Keys.Space:
                     isRunning = true;
@@ -147,51 +150,51 @@ namespace Pong
         private void button1_Click(object sender, EventArgs e) // Play button
         {
             // Hide the menu
-            pictureBox1.Visible = false;
-            pictureBox2.Visible = false;
-            button1.Visible = false;
-            button2.Visible = false;
-            pictureBox11.Visible = true; // Show play image
+            pictureBox1.Visible = false;    // Logo image
+            pictureBox2.Visible = false;    // Made by image
+            button1.Visible = false;        // Play button
+            button2.Visible = false;        //  Controls button
+            pictureBox11.Visible = true;    // Show play image
 
             // Start the game
-            timer1.Enabled = true;
+            timer1.Enabled = true;          // Enable the timer
             controller.Ball.ResetBall();
         }
 
         private void button2_Click(object sender, EventArgs e) // Controls button
         {
             // Hide the menu
-            pictureBox1.Visible = false;
-            pictureBox2.Visible = false;
-            button1.Visible = false;
-            button2.Visible = false;
+            pictureBox1.Visible = false;    // Logo image
+            pictureBox2.Visible = false;    // Made by image
+            button1.Visible = false;        // Play button
+            button2.Visible = false;        // Controls button
 
             // Show the controls menu
-            pictureBox3.Visible = true;
-            pictureBox4.Visible = true;
-            pictureBox5.Visible = true;
-            pictureBox6.Visible = true;
-            pictureBox7.Visible = true;
-            pictureBox8.Visible = true;
-            button3.Visible = true;
+            pictureBox3.Visible = true;     // Controls image 1
+            pictureBox4.Visible = true;     // Controls image 2
+            pictureBox5.Visible = true;     // Controls image 3
+            pictureBox6.Visible = true;     // Controls image 4
+            pictureBox8.Visible = true;     // Controls image 5 
+            pictureBox7.Visible = true;     // Controls image 6
+            button3.Visible = true;         // Back to menu button
         }
 
         private void button3_Click(object sender, EventArgs e) // Back to menu button
         {
             // Hide the menu
-            pictureBox1.Visible = true;
-            pictureBox2.Visible = true;
-            button1.Visible = true;
-            button2.Visible = true;
+            pictureBox1.Visible = true;     // Logo image
+            pictureBox2.Visible = true;     // Made by image
+            button1.Visible = true;         // Play button
+            button2.Visible = true;         // Controls button
 
             // Show the controls menu
-            pictureBox3.Visible = false;
-            pictureBox4.Visible = false;
-            pictureBox5.Visible = false;
-            pictureBox6.Visible = false ;
-            pictureBox7.Visible = false;
-            pictureBox8.Visible = false;
-            button3.Visible = false;
+            pictureBox3.Visible = false;    // Controls image 1
+            pictureBox4.Visible = false;    // Controls image 2
+            pictureBox5.Visible = false;    // Controls image 3
+            pictureBox6.Visible = false;    // Controls image 4
+            pictureBox7.Visible = false;    // Controls image 6
+            pictureBox8.Visible = false;    // Controls image 5
+            button3.Visible = false;        // Back to menu button
         }
     }
 }

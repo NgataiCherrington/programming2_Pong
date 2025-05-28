@@ -33,17 +33,17 @@ namespace Pong
             this.brush = new SolidBrush(color);
         }
 
-        public Rectangle GetBounds()
+        public Rectangle GetBounds()    // This method returns the bounds of the paddle as a Rectangle object
         {
             return new Rectangle(position.X, position.Y, (int)(double)16.5, 95);
         }
 
-        public void Draw()
+        public void Draw() // This method draws the paddle on the graphics object
         {
             graphics.FillRectangle(brush, new Rectangle(position.X, position.Y, (int)(double)16.5, 95));
         }
         
-        public void MoveUp(bool moveUp)
+        public void MoveUp(bool moveUp) // This method moves the paddle up if the moveUp parameter is true and the paddle is not at the top of the client area
         {
             if(moveUp && position.Y > 0)
             {
@@ -51,7 +51,7 @@ namespace Pong
             }
         }
         
-        public void MoveDown(bool moveDown)
+        public void MoveDown(bool moveDown) // This method moves the paddle down if the moveDown parameter is true and the paddle is not at the bottom of the client area
         {
             if (moveDown && position.Y + GetBounds().Height < clientSize.Height)
             {

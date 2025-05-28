@@ -80,7 +80,6 @@ namespace task7_graphics
                     //ball.Speed = new Point(-ball.Speed.X + 1, Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
                     ball.Speed = new Point(-ball.Speed.X + 5, ball.Speed.Y + random.Next(-2, 7));
                 }
-
                 soundPlayer.Play();
             }
 
@@ -98,12 +97,11 @@ namespace task7_graphics
                     //ball.Speed = new Point(-ball.Speed.X + 1, Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
                     ball.Speed = new Point(-ball.Speed.X + 1, ball.Speed.Y + random.Next(-2, 7));
                 }
-
                 soundPlayer.Play();
             }
         }
 
-        public void DrawScore()
+        public void DrawScore()     // This method draws the score of both players on the screen
         {
             Font font = new Font("Impact", 45, FontStyle.Regular);
             Brush brush = new SolidBrush(Color.WhiteSmoke);
@@ -112,7 +110,7 @@ namespace task7_graphics
             graphics.DrawString($"{scoreRight}", font, brush, ball.ClientSize.Width - 200, 10);
         }
 
-        public void ResetGamePosition()
+        public void ResetGamePosition()     // This method resets the positions of the ball and paddles, and resets the scores
         {
             ball.Position = new Point(ball.ClientSize.Width / 2, ball.ClientSize.Height / 2);
             leftPaddle.Position = new Point(20, ball.ClientSize.Height / 2);
@@ -122,7 +120,7 @@ namespace task7_graphics
             scoreRight = 0;
         }
 
-        public void GameScore()
+        public void GameScore()     // This method checks if the ball has gone out of bounds and updates the score accordingly
         {
             Font font = new Font("Tahoma", 16, FontStyle.Bold);
             Brush brush = new SolidBrush(Color.White);
@@ -134,7 +132,7 @@ namespace task7_graphics
 
                 if (scoreRight == 1)
                 {
-                    ResetGamePosition();
+                    ResetGamePosition();    //  Reset the game position
                 }
             }
 
@@ -150,7 +148,7 @@ namespace task7_graphics
             }
         }
 
-        public void Run()
+        public void Run()   // This method runs the game loop, moving the ball, checking for collisions, updating the score, and drawing the ball and paddles
         {
             ball.Move(true);
             CheckCollison();
