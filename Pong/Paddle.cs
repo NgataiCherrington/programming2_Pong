@@ -47,7 +47,7 @@ namespace Pong
         {
             if(moveUp && position.Y > 0)
             {
-                position.Y -= speed.Y + (int)(double) 5;
+                position.Y -= speed.Y + (int)(double) 7.5;
             }
         }
         
@@ -55,7 +55,7 @@ namespace Pong
         {
             if (moveDown && position.Y + GetBounds().Height < clientSize.Height)
             {
-                position.Y += speed.Y + (int)(double) 5;
+                position.Y += speed.Y + (int)(double) 7.5;
             }
         }
     }

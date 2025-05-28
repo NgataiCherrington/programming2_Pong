@@ -16,13 +16,11 @@ namespace Pong
     {
         Graphics graphics;
         Controller controller;
-        Ball ball;
-        Paddle leftPaddle;
-        Paddle rightPaddle;
 
         private Bitmap offScreenBitmap;
         private Graphics offScreenGraphics;
         private bool isRunning;
+        private bool gameOver = true; 
         private SoundPlayer soundPlayer;
 
         private HashSet<Keys> pressedKeys;
@@ -36,9 +34,10 @@ namespace Pong
             offScreenGraphics = Graphics.FromImage(offScreenBitmap); // Create graphics from the bitmap
 
             graphics = CreateGraphics(); // Create graphics for the form
-            
-            controller = new Controller(new Point(0, 0), new Point(0, 0), Color.Black, offScreenGraphics, Brushes.White, ClientSize); // Initialize the offScreen graphics
 
+            int ScoreLeft = 0;
+            int ScoreRight = 0;
+            controller = new Controller(new Point(0, 0), new Point(0, 0), Color.Black, offScreenGraphics, Brushes.White, ClientSize, ScoreLeft, ScoreRight); // Initialize the offScreen graphics
 
             timer1.Enabled = false; // Disable the timer initially
             timer1.Interval = 16; // Set the timer interval to approximately 60 FPS
@@ -77,13 +76,13 @@ namespace Pong
 
         private void TogglePauseMenu(bool isShowing)    //  This method toggles the visibility of the pause menu
         {
-           if (!isShowing)
+            if (!isShowing)
             {
                 pictureBox9.Visible = false;
                 pictureBox10.Visible = true;
             }
 
-           if (isShowing)
+            if (isShowing)
             {
                 pictureBox9.Visible = true;
                 pictureBox10.Visible = false;
@@ -92,32 +91,33 @@ namespace Pong
 
         private void timer1_Tick(object sender, EventArgs e)    // This method is called on each timer tick to update the game state
         {
+            ToggleMenu(false);
+            offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);    // Clear the off-screen graphics with a black rectangle
+            //isRunning = 
+            gameOver = controller.Run();   //  Run the game logic
+            graphics.DrawImage(offScreenBitmap, 0, 0);
 
-            if (isRunning)  // If the game is running, we will update the game state
+            if (pressedKeys.Contains(Keys.W))
             {
-                ToggleMenu(false);
-                offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);    // Clear the off-screen graphics with a black rectangle
-                controller.Run();   //  Run the game logic
-                graphics.DrawImage(offScreenBitmap, 0, 0);
-
-                if (pressedKeys.Contains(Keys.W))
-                {
-                    controller.LeftPaddle.MoveUp(true);
-                }
-                if (pressedKeys.Contains(Keys.S))
-                {
-                    controller.LeftPaddle.MoveDown(true);
-                }
-                if (pressedKeys.Contains(Keys.Up))
-                {
-                    controller.RightPaddle.MoveUp(true);
-                }
-                if (pressedKeys.Contains(Keys.Down))
-                {
-                    controller.RightPaddle.MoveDown(true);
-                }
+                controller.LeftPaddle.MoveUp(true);
             }
-
+            if (pressedKeys.Contains(Keys.S))
+            {
+                controller.LeftPaddle.MoveDown(true);
+            }
+            if (pressedKeys.Contains(Keys.Up))
+            {
+                controller.RightPaddle.MoveUp(true);
+            }
+            if (pressedKeys.Contains(Keys.Down))
+            {
+                controller.RightPaddle.MoveDown(true);
+            }
+            
+            if (!isRunning)
+            {
+                timer1.Enabled = false; // Stop the timer if the game is not running
+            }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)     // This method is called when a key is released
@@ -141,9 +141,11 @@ namespace Pong
                     TogglePauseMenu(false);
                     break;
                 case Keys.R:
-                    isRunning = false;
+                    isRunning = true;
                     controller.ResetGamePosition();
-                    break;     
+                    controller.ScoreLeft = 0;
+                    controller.ScoreRight = 0;
+                    break;
             }
         }
 

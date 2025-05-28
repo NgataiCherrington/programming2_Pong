@@ -21,23 +21,28 @@ namespace task7_graphics
         private SoundPlayer soundPlayer;
         private int scoreLeft = 0;
         private int scoreRight = 0;
+        bool gameOver = false; // Variable to track if the game is over
         Random random = new Random();
 
         public Ball Ball { get => ball; set => ball = value; }
         public Paddle LeftPaddle { get => leftPaddle; set => leftPaddle = value; }
         public Paddle RightPaddle { get => rightPaddle; set => rightPaddle = value; }
-        
-        public Controller(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) : base(position, speed, color, graphics, brush, clientSize)
+        public int ScoreLeft { get => scoreLeft; set => scoreLeft = value; }
+        public int ScoreRight { get => scoreRight; set => scoreRight = value; }
+
+        public Controller(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize, int scoreLeft, int scoreRight) : base(position, speed, color, graphics, brush, clientSize)
         {
             this.Graphics = graphics;
+            this.ScoreLeft = scoreLeft;
+            this.ScoreRight = scoreRight;
 
             ball = new Ball(
-                new Point(30, 10), 
+                new Point(30, 10),
                 new Point(clientSize.Width / 2, clientSize.Height / 2),
                 Color.FromArgb(random.Next(256),
                 random.Next(256), random.Next(256)),
-                graphics, 
-                brush, 
+                graphics,
+                brush,
                 clientSize);
 
             leftPaddle = new Paddle(
@@ -45,8 +50,8 @@ namespace task7_graphics
                 new Point((int)(double)8.5, (int)(double)8.5),
                 Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)),
                 graphics,
-                brush, 
-                clientSize 
+                brush,
+                clientSize
             );
 
             rightPaddle = new Paddle(
@@ -54,8 +59,8 @@ namespace task7_graphics
                 new Point((int)(double)8.5, (int)(double)8.5),
                 Color.FromArgb(random.Next(256), random.Next(256), random.Next(256)),
                 graphics,
-                brush, 
-                clientSize 
+                brush,
+                clientSize
             );
         }
 
@@ -70,15 +75,15 @@ namespace task7_graphics
             if (ballBounds.IntersectsWith(leftPaddleBounds)) // Check if the ball intersects with the left paddle
             {
                 int paddleMiddle = leftPaddle.Position.Y + leftPaddle.GetBounds().Height / 2; // Calculate the middle of the paddle
-                if (ball.Position.Y < paddleMiddle) 
+                if (ball.Position.Y < paddleMiddle)
                 {
                     //ball.Speed = new Point(-ball.Speed.X + 1, -Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
-                    ball.Speed = new Point(-ball.Speed.X + 5, ball.Speed.Y + random.Next(-2, 7));
+                    ball.Speed = new Point(-ball.Speed.X + 4, ball.Speed.Y + random.Next(-2, 7));
                 }
                 else
                 {
                     //ball.Speed = new Point(-ball.Speed.X + 1, Math.Abs(ball.Speed.Y)); // Reverse the ball's speed and adjust its Y speed
-                    ball.Speed = new Point(-ball.Speed.X + 5, ball.Speed.Y + random.Next(-2, 7));
+                    ball.Speed = new Point(-ball.Speed.X + 4, ball.Speed.Y + random.Next(-2, 7));
                 }
                 soundPlayer.Play();
             }
@@ -101,6 +106,16 @@ namespace task7_graphics
             }
         }
 
+        //private void GameOver()
+        //{
+        //    bool gameOver;
+
+        //    if (scoreLeft >= 1 || scoreRight >= 1)
+        //    {
+        //        gameOver = true; // Set gameOver to true if either player reaches 10 points   
+        //    }
+        //}
+
         public void DrawScore()     // This method draws the score of both players on the screen
         {
             Font font = new Font("Impact", 45, FontStyle.Regular);
@@ -113,14 +128,14 @@ namespace task7_graphics
         public void ResetGamePosition()     // This method resets the positions of the ball and paddles, and resets the scores
         {
             ball.Position = new Point(ball.ClientSize.Width / 2, ball.ClientSize.Height / 2);
-            leftPaddle.Position = new Point(20, ball.ClientSize.Height / 2);
-            rightPaddle.Position = new Point(ball.ClientSize.Width - 40, ball.ClientSize.Height / 2);
+            leftPaddle.Position = new Point(10, ball.ClientSize.Height / 2);
+            rightPaddle.Position = new Point(ball.ClientSize.Width - 30, ball.ClientSize.Height / 2);
 
             scoreLeft = 0;
             scoreRight = 0;
         }
 
-        public void GameScore()     // This method checks if the ball has gone out of bounds and updates the score accordingly
+        public bool GameScore()     // This method checks if the ball has gone out of bounds and updates the score accordingly
         {
             Font font = new Font("Tahoma", 16, FontStyle.Bold);
             Brush brush = new SolidBrush(Color.White);
@@ -129,35 +144,41 @@ namespace task7_graphics
             {
                 scoreRight++; // Right player scores
                 ball.ResetBall();  // Reset the ball
-
-                if (scoreRight == 1)
-                {
-                    ResetGamePosition();    //  Reset the game position
-                }
             }
-
             else if (ball.Position.X > ball.ClientSize.Width) // Ball went out on the right side
             {
                 scoreLeft++;  // Left player scores
                 ball.ResetBall();   // Reset the ball
-
-                if (scoreLeft == 1)
-                {
-                    ResetGamePosition();
-                }
             }
+            if (scoreLeft >= 1 || scoreRight >= 1)
+            {
+                if (scoreLeft > 1)
+                {
+                    graphics.DrawString("Left Player Wins!", font, brush, ball.ClientSize.Width / 2 - 100, ball.ClientSize.Height / 2);
+                }
+                else if (scoreRight > 1)
+                {
+                    graphics.DrawString("Right Player Wins!", font, brush, ball.ClientSize.Width / 2 - 100, ball.ClientSize.Height / 2);
+                }
+
+                return true; // Return true to indicate the game is over
+            }
+
+            else { return false; }
         }
 
-        public void Run()   // This method runs the game loop, moving the ball, checking for collisions, updating the score, and drawing the ball and paddles
+        public bool Run()   // This method runs the game loop, moving the ball, checking for collisions, updating the score, and drawing the ball and paddles
         {
             ball.Move(true);
             CheckCollison();
-            GameScore();
             ball.Draw();
             ball.BounceSide();
             leftPaddle.Draw();
             rightPaddle.Draw();
             DrawScore();
+            gameOver = GameScore(); // Return the result of GameScore to indicate if the game is over
+
+            return gameOver;
         }
     }
 }

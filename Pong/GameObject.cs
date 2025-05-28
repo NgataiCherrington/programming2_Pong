@@ -32,6 +32,5 @@ namespace Pong
         public Graphics Graphics { get => graphics; set => graphics = value; }
         public Brush Brush { get => brush; set => brush = value; }
         public Size ClientSize { get => clientSize; set => clientSize = value; }
-
     }
 }
