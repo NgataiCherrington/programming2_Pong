@@ -91,15 +91,11 @@ namespace Pong
         private void timer1_Tick(object sender, EventArgs e)    // This method is called on each timer tick to update the game state
         {
 
-            ToggleMenu(false);
-            offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);    // Clear the off-screen graphics with a black rectangle
 
-            if (controller.GameOver)
-            {
-                timer1.Enabled = false;
-            }
             if (isRunning)
             {
+                ToggleMenu(false);
+                offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);    // Clear the off-screen graphics with a black rectangle
                 controller.Run();   //  Run the game logic
                 graphics.DrawImage(offScreenBitmap, 0, 0);
 
@@ -119,6 +115,10 @@ namespace Pong
                 {
                     controller.RightPaddle.MoveDown(true);
                 }
+            }
+            if (controller.GameOver)
+            {
+                timer1.Enabled = false; // Stop the timer when the game is over
             }
 
 
