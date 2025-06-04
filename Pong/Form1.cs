@@ -20,7 +20,6 @@ namespace Pong
         private Bitmap offScreenBitmap;
         private Graphics offScreenGraphics;
         private bool isRunning;
-        private bool gameOver = true; 
         private SoundPlayer soundPlayer;
 
         private HashSet<Keys> pressedKeys;
@@ -91,42 +90,38 @@ namespace Pong
 
         private void timer1_Tick(object sender, EventArgs e)    // This method is called on each timer tick to update the game state
         {
-           
+
             ToggleMenu(false);
             offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);    // Clear the off-screen graphics with a black rectangle
-                                                                                    
+
             if (controller.GameOver)
             {
                 timer1.Enabled = false;
             }
-            else
+            if (isRunning)
             {
                 controller.Run();   //  Run the game logic
-            }
-            
-            graphics.DrawImage(offScreenBitmap, 0, 0);
+                graphics.DrawImage(offScreenBitmap, 0, 0);
 
-            if (pressedKeys.Contains(Keys.W))
-            {
-                controller.LeftPaddle.MoveUp(true);
+                if (pressedKeys.Contains(Keys.W))
+                {
+                    controller.LeftPaddle.MoveUp(true);
+                }
+                if (pressedKeys.Contains(Keys.S))
+                {
+                    controller.LeftPaddle.MoveDown(true);
+                }
+                if (pressedKeys.Contains(Keys.Up))
+                {
+                    controller.RightPaddle.MoveUp(true);
+                }
+                if (pressedKeys.Contains(Keys.Down))
+                {
+                    controller.RightPaddle.MoveDown(true);
+                }
             }
-            if (pressedKeys.Contains(Keys.S))
-            {
-                controller.LeftPaddle.MoveDown(true);
-            }
-            if (pressedKeys.Contains(Keys.Up))
-            {
-                controller.RightPaddle.MoveUp(true);
-            }
-            if (pressedKeys.Contains(Keys.Down))
-            {
-                controller.RightPaddle.MoveDown(true);
-            }
-            
-            //if (!isRunning)
-            //{
-            //    timer1.Enabled = false; // Stop the timer if the game is not running
-            //}
+
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)     // This method is called when a key is released

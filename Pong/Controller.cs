@@ -141,7 +141,7 @@ namespace task7_graphics
                 scoreLeft++;  // Left player scores
                 ball.ResetBall();   // Reset the ball
             }
-            if (scoreLeft >= 10 || scoreRight >= 10)
+            if (scoreLeft >= 1 || scoreRight >= 1)
             {
                 if (scoreLeft > 1)
                 {
@@ -169,7 +169,7 @@ namespace task7_graphics
                 GameScore();
                 
                 
-                if (scoreLeft >= 10 || scoreRight >= 10)
+                if (scoreLeft >= 1 || scoreRight >= 1)
                 {
                     gameOver = true; // Return the result of GameScore to indicate if the game is over
                 }
