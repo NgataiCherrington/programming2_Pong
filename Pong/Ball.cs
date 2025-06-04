@@ -57,10 +57,10 @@ namespace task7_graphics
 
         public void BounceSide() // This method checks if the ball has hit the left or right side of the client area and resets it if it has
         {
-            if (position.X < 0 || position.X > clientSize.Width)
-            {
-                ResetBall();
-            }
+            //if (position.X < 0 || position.X > clientSize.Width)
+            //{
+            //    //ResetBall();
+            //}
 
             if (position.Y < 0 || position.Y > clientSize.Height)
             {

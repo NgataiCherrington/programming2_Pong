@@ -49,8 +49,8 @@ namespace Pong
             button1.Visible = true; // Play button
             button2.Visible = true; // Controls button
 
-            soundPlayer = new SoundPlayer(Properties.Resources.gameMusic); // Load the sound file
-            soundPlayer.PlayLooping(); // Play the sound in a loop
+            //soundPlayer = new SoundPlayer(Properties.Resources.gameMusic); // Load the sound file
+            //soundPlayer.PlayLooping(); // Play the sound in a loop
         }
 
         private void ToggleMenu(bool isShowing)     // This method toggles the visibility of the main menu and controls menu
@@ -91,10 +91,19 @@ namespace Pong
 
         private void timer1_Tick(object sender, EventArgs e)    // This method is called on each timer tick to update the game state
         {
+           
             ToggleMenu(false);
             offScreenGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);    // Clear the off-screen graphics with a black rectangle
-            //isRunning = 
-            gameOver = controller.Run();   //  Run the game logic
+                                                                                    
+            if (controller.GameOver)
+            {
+                timer1.Enabled = false;
+            }
+            else
+            {
+                controller.Run();   //  Run the game logic
+            }
+            
             graphics.DrawImage(offScreenBitmap, 0, 0);
 
             if (pressedKeys.Contains(Keys.W))
@@ -114,10 +123,10 @@ namespace Pong
                 controller.RightPaddle.MoveDown(true);
             }
             
-            if (!isRunning)
-            {
-                timer1.Enabled = false; // Stop the timer if the game is not running
-            }
+            //if (!isRunning)
+            //{
+            //    timer1.Enabled = false; // Stop the timer if the game is not running
+            //}
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)     // This method is called when a key is released

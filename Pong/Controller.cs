@@ -29,6 +29,7 @@ namespace task7_graphics
         public Paddle RightPaddle { get => rightPaddle; set => rightPaddle = value; }
         public int ScoreLeft { get => scoreLeft; set => scoreLeft = value; }
         public int ScoreRight { get => scoreRight; set => scoreRight = value; }
+        public bool GameOver { get => gameOver; set => gameOver = value; }
 
         public Controller(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize, int scoreLeft, int scoreRight) : base(position, speed, color, graphics, brush, clientSize)
         {
@@ -106,16 +107,6 @@ namespace task7_graphics
             }
         }
 
-        //private void GameOver()
-        //{
-        //    bool gameOver;
-
-        //    if (scoreLeft >= 1 || scoreRight >= 1)
-        //    {
-        //        gameOver = true; // Set gameOver to true if either player reaches 10 points   
-        //    }
-        //}
-
         public void DrawScore()     // This method draws the score of both players on the screen
         {
             Font font = new Font("Impact", 45, FontStyle.Regular);
@@ -135,7 +126,7 @@ namespace task7_graphics
             scoreRight = 0;
         }
 
-        public bool GameScore()     // This method checks if the ball has gone out of bounds and updates the score accordingly
+        public void GameScore()     // This method checks if the ball has gone out of bounds and updates the score accordingly
         {
             Font font = new Font("Tahoma", 16, FontStyle.Bold);
             Brush brush = new SolidBrush(Color.White);
@@ -150,7 +141,7 @@ namespace task7_graphics
                 scoreLeft++;  // Left player scores
                 ball.ResetBall();   // Reset the ball
             }
-            if (scoreLeft >= 1 || scoreRight >= 1)
+            if (scoreLeft >= 10 || scoreRight >= 10)
             {
                 if (scoreLeft > 1)
                 {
@@ -161,24 +152,29 @@ namespace task7_graphics
                     graphics.DrawString("Right Player Wins!", font, brush, ball.ClientSize.Width / 2 - 100, ball.ClientSize.Height / 2);
                 }
 
-                return true; // Return true to indicate the game is over
             }
-
-            else { return false; }
         }
 
-        public bool Run()   // This method runs the game loop, moving the ball, checking for collisions, updating the score, and drawing the ball and paddles
+        public void Run()   // This method runs the game loop, moving the ball, checking for collisions, updating the score, and drawing the ball and paddles
         {
-            ball.Move(true);
-            CheckCollison();
-            ball.Draw();
-            ball.BounceSide();
-            leftPaddle.Draw();
-            rightPaddle.Draw();
-            DrawScore();
-            gameOver = GameScore(); // Return the result of GameScore to indicate if the game is over
-
-            return gameOver;
+            if (!gameOver)
+            {
+                ball.Move(true);
+                CheckCollison();
+                ball.Draw();
+                ball.BounceSide();
+                leftPaddle.Draw();
+                rightPaddle.Draw();
+                DrawScore();
+                GameScore();
+                
+                
+                if (scoreLeft >= 10 || scoreRight >= 10)
+                {
+                    gameOver = true; // Return the result of GameScore to indicate if the game is over
+                }
+            }
+            
         }
     }
 }
