@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Pong
 {
+    /// <summary>
+    /// Base class for all game objects in the Pong game
+    /// </summary>
     public class GameObject
     {
         protected Point position;

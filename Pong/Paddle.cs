@@ -9,6 +9,9 @@ using task7_graphics;
 
 namespace Pong
 {
+    /// <summary>
+    /// Represents the paddles in the Pong game
+    /// </summary>
     public class Paddle : GameObject
     { 
         public Paddle(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) : base(position, speed, color, graphics, brush, clientSize)

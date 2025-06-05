@@ -10,6 +10,9 @@ using Pong;
 
 namespace task7_graphics
 {
+    /// <summary>
+    /// Represents the ball in the Pong game
+    /// </summary>
     public class Ball : GameObject
     {
         private const int SIZE = 20;    // This constant defines the size of the ball
@@ -38,6 +41,10 @@ namespace task7_graphics
                 position.Y += speed.Y;
             }
         }
+
+        /// <summary>
+        /// Resets the position and speed of the ball to a random direction
+        /// </summary>
 
         public void ResetBall() // This method resets the position and speed of the ball to a random direction
         {

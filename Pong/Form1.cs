@@ -55,6 +55,9 @@ namespace Pong
             soundPlayer.PlayLooping();
         }
 
+        /// <summary>
+        /// Toggles the visibility of the main menu and controls menu based on the isShowing parameter
+        /// </summary>
         private void ToggleMenu(bool isShowing)     // This method toggles the visibility of the main menu and controls menu
         {
             if (!isShowing)
@@ -75,7 +78,9 @@ namespace Pong
                 button3.Visible = false;
             }
         }
-
+        /// <summary>
+        /// Toggle the visibility of the pause control base on the isShowing parameter
+        /// </summary>
         private void TogglePauseMenu(bool isShowing)    //  This method toggles the visibility of the pause menu
         {
             if (!isShowing)
@@ -148,12 +153,12 @@ namespace Pong
                     isRunning = true;
                     controller.ResetGamePosition();
                     break;
-                case Keys.N:
-                    timer1.Enabled = true;
-                    break;
             }
         }
 
+        /// <summary>
+        /// Handle the click event for the pause menu
+        /// </summary>
         private void button1_Click(object sender, EventArgs e) // Play button
         {
             // Hide the menu
@@ -168,6 +173,9 @@ namespace Pong
             controller.Ball.ResetBall();
         }
 
+        /// <summary>
+        /// Handle the click event for the controls menu
+        /// </summary>
         private void button2_Click(object sender, EventArgs e) // Controls button
         {
             // Hide the menu
@@ -186,6 +194,9 @@ namespace Pong
             button3.Visible = true;         // Back to menu button
         }
 
+        /// <summary>
+        /// Handle the click event for the back to menu button
+        /// </summary>
         private void button3_Click(object sender, EventArgs e) // Back to menu button
         {
             // Hide the menu

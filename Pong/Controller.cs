@@ -13,6 +13,9 @@ using Pong;
 
 namespace task7_graphics
 {
+    /// <summary>
+    /// Represents the controller for the Pong game, managing the ball, paddles, and game logic
+    /// </summary>
     public class Controller : GameObject
     {
         private Ball ball;
@@ -61,6 +64,11 @@ namespace task7_graphics
             );
         }
 
+        /// <summary>
+        /// Checks for collisions between the ball and the paddles, and updates the ball's speed accordingly
+        /// Ball speeds up everytime hit collides with a paddle
+        /// Paddles are divided into top and bottom halves
+        /// </summary>
         public void CheckCollison()
         {
             Rectangle ballBounds = ball.GetBounds();  // Get the bounds of the ball
@@ -136,6 +144,9 @@ namespace task7_graphics
             }
         }
 
+        /// <summary>
+        /// Runs the game loop, moving the ball, checking for collisions, updating the score, and drawing the ball and paddles
+        /// </summary>
         public void Run()   // This method runs the game loop, moving the ball, checking for collisions, updating the score, and drawing the ball and paddles
         {
             Font font = new Font("Tahoma", 16, FontStyle.Bold);
