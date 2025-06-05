@@ -11,20 +11,6 @@ namespace Pong
 {
     public class Paddle : GameObject
     { 
-        //private Point position;
-        //private Point speed;
-        //private Color color;
-        //private Graphics graphics;
-        //private Brush brush;
-        //private Size clientSize;
-
-        //public Point Position { get => position; set => position = value; }
-        //public Color Color { get => color; set => color = value; }
-        //public Graphics Graphics { get => graphics; set => graphics = value; }
-        //public Brush Brush { get => brush; set => brush = value; }
-        //public Size ClientSize { get => clientSize; set => clientSize = value; }
-        //public Point Speed { get => speed; set => speed = value; }
-
         public Paddle(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) : base(position, speed, color, graphics, brush, clientSize)
         {
             this.color = color;

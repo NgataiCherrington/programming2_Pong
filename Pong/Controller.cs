@@ -27,15 +27,11 @@ namespace task7_graphics
         public Ball Ball { get => ball; set => ball = value; }
         public Paddle LeftPaddle { get => leftPaddle; set => leftPaddle = value; }
         public Paddle RightPaddle { get => rightPaddle; set => rightPaddle = value; }
-        public int ScoreLeft { get => scoreLeft; set => scoreLeft = value; }
-        public int ScoreRight { get => scoreRight; set => scoreRight = value; }
         public bool GameOver { get => gameOver; set => gameOver = value; }
 
-        public Controller(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize, int scoreLeft, int scoreRight) : base(position, speed, color, graphics, brush, clientSize)
+        public Controller(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) : base(position, speed, color, graphics, brush, clientSize)
         {
             this.Graphics = graphics;
-            this.ScoreLeft = scoreLeft;
-            this.ScoreRight = scoreRight;
 
             ball = new Ball(
                 new Point(30, 10),
@@ -126,33 +122,19 @@ namespace task7_graphics
             scoreRight = 0;
         }
 
-        //public void GameScore()     // This method checks if the ball has gone out of bounds and updates the score accordingly
-        //{
-        //    //Font font = new Font("Tahoma", 16, FontStyle.Bold);
-        //    //Brush brush = new SolidBrush(Color.White);
-
-        //    if (ball.Position.X < 0) // Ball went out on the left side
-        //    {
-        //        scoreRight++; // Right player scores
-        //        ball.ResetBall();  // Reset the ball
-        //    }
-        //    else if (ball.Position.X > ball.ClientSize.Width) // Ball went out on the right side
-        //    {
-        //        scoreLeft++;  // Left player scores
-        //        ball.ResetBall();   // Reset the ball
-        //    }
-        //    if (scoreLeft >= 10 || scoreRight >= 10)
-        //    {
-        //        if (scoreLeft > 10)
-        //        {
-        //            graphics.DrawString("Left Player Wins!", font, brush, ball.ClientSize.Width / 2 - 100, ball.ClientSize.Height / 2);
-        //        }
-        //        else if (scoreRight > 10)
-        //        {
-        //            graphics.DrawString("Right Player Wins!", font, brush, ball.ClientSize.Width / 2 - 100, ball.ClientSize.Height / 2);
-        //        }
-        //    }
-        //}
+        public void GameScore()     // This method checks if the ball has gone out of bounds and updates the score accordingly
+        {  
+            if (ball.Position.X < 0) // Ball went out on the left side
+            {
+                scoreRight++; // Right player scores
+                ball.ResetBall();  // Reset the ball
+            }
+            else if (ball.Position.X > ball.ClientSize.Width) // Ball went out on the right side
+            {
+                scoreLeft++;  // Left player scores
+                ball.ResetBall();   // Reset the ball
+            }
+        }
 
         public void Run()   // This method runs the game loop, moving the ball, checking for collisions, updating the score, and drawing the ball and paddles
         {
@@ -168,28 +150,19 @@ namespace task7_graphics
                 leftPaddle.Draw();
                 rightPaddle.Draw();
                 DrawScore();
-                //GameScore();
-                if (ball.Position.X < 0) // Ball went out on the left side
-                {
-                    scoreRight++; // Right player scores
-                    ball.ResetBall();  // Reset the ball
-                }
-                else if (ball.Position.X > ball.ClientSize.Width) // Ball went out on the right side
-                {
-                    scoreLeft++;  // Left player scores
-                    ball.ResetBall();   // Reset the ball
-                }
-
+                GameScore();
+                
                 if (scoreLeft >= 10 || scoreRight >= 10)
                 {
-                    if (scoreLeft > 10)
+                    if (scoreLeft >= 10)
                     {
                         graphics.DrawString("Left Player Wins!", font, brush, ball.ClientSize.Width / 2 - 100, ball.ClientSize.Height / 2);
                     }
-                    else if (scoreRight > 10)
+                    else if (scoreRight >= 10)
                     {
                         graphics.DrawString("Right Player Wins!", font, brush, ball.ClientSize.Width / 2 - 100, ball.ClientSize.Height / 2);
                     }
+
                     gameOver = true; // Return the result of GameScore to indicate if the game is over
                 }
             }

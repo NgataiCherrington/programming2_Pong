@@ -14,8 +14,6 @@ namespace task7_graphics
     {
         private const int SIZE = 20;    // This constant defines the size of the ball
 
-        public static int SIZE1 => SIZE;    // This property allows access to the SIZE constant from outside the class
-
         public Ball(Point position, Point speed, Color color, Graphics graphics, Brush brush, Size clientSize) 
             : base(position, speed, color, graphics, brush, clientSize)
         {
@@ -57,11 +55,6 @@ namespace task7_graphics
 
         public void BounceSide() // This method checks if the ball has hit the left or right side of the client area and resets it if it has
         {
-            //if (position.X < 0 || position.X > clientSize.Width)
-            //{
-            //    //ResetBall();
-            //}
-
             if (position.Y < 0 || position.Y > clientSize.Height)
             {
                 speed.Y = -speed.Y;

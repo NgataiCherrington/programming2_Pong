@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Pong.Paddle">
+    <Position X="7.25" Y="4" Width="1.5" />
+    <InheritanceLine Type="Pong.GameObject" ManuallyRouted="true">
+      <Path>
+        <Point X="9" Y="3.276" />
+        <Point X="9" Y="3.729" />
+        <Point X="8" Y="3.729" />
+        <Point X="8" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAgAAgAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Paddle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="task7_graphics.Ball">
+    <Position X="9.5" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="Pong.GameObject" ManuallyRouted="true">
+      <Path>
+        <Point X="9" Y="3.276" />
+        <Point X="9" Y="3.719" />
+        <Point X="9.67" Y="3.719" />
+        <Point X="9.67" Y="4" />
+        <Point X="10.25" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIgACgAAAAAAAAAAAAAAAAAAAAAAAAIAAgA=</HashCode>
+      <FileName>Ball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pong.Form1">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAIpQAADAAAVFAAACAQAACAAA4IAgAQHAgAAhAAAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pong.GameObject">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAIgAAAAIAABCAgAAQiAAAAAgAAAAAg=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="task7_graphics.Controller">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACAAgAQAAIABAAAAAQAAAAAAAAQAAEAAAIQAAACAAII=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
